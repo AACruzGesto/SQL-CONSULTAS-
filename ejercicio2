@@ -129,6 +129,18 @@ AND NOT EXISTS (
     ON cu.numero_cuenta = cc.numero_cuenta
   WHERE cu.nombre_sucursal = 'Perryridge'  
   )
+
+-- Crea una consulta que muestre, en franjas de 1000 en 1000, el número de
+-- prestamos cuyo monto (cantidad) esté en cada una de las franjas
+
+SELECT franja, COUNT(*) 
+FROM (
+  SELECT floor(cantidad / 1000.0) * 1000 AS franja
+  FROM prestamo
+) t
+GROUP BY franja
+ORDER BY franja;
+
   
 
 
